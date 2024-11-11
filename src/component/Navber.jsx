@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 function Navber() {
     const link = <>
@@ -7,6 +8,9 @@ function Navber() {
     <li><NavLink to='/login'>Login</NavLink></li>
     <li><NavLink to='/register'>Register</NavLink></li>
     </>
+
+    const {name} = useContext(AuthContext)
+    console.log(name);
   return (
     <div className="navbar bg-base-100 shadow-xl py-6">
       <div className="navbar-start">
@@ -42,7 +46,7 @@ function Navber() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn text-xl">Button</a>
+        <a className="btn text-xl">{name}</a>
       </div>
     </div>
   );

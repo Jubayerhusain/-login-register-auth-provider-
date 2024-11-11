@@ -1,15 +1,26 @@
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 function Register() {
+  const {createUser} = useContext(AuthContext);
     
     const hundleRegister = (event) =>{
+
+
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
 
         console.log(name, email, password);
-
+        createUser(email, password)
+        .then(res => {
+          console.log(res.user);
+        })
+        .catch(error =>{
+          console.log('ERROR', error);
+        })
     }
 
   return (
