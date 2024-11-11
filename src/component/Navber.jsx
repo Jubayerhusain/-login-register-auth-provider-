@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 function Navber() {
@@ -9,8 +9,17 @@ function Navber() {
     <li><NavLink to='/register'>Register</NavLink></li>
     </>
 
-    const {name} = useContext(AuthContext)
+    const {user, signOutUser} = useContext(AuthContext)
     console.log(name);
+    const hundleSignOut = () => {
+      signOutUser()
+      .then(()=>{
+        console.log("User logOutsuccessfully done");
+      })
+      .catch((error)=>{
+        console.log('ERROR', error.message);
+      })
+    }
   return (
     <div className="navbar bg-base-100 shadow-xl py-6">
       <div className="navbar-start">
@@ -46,7 +55,14 @@ function Navber() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn text-xl">{name}</a>
+        <a className="btn text-xl">
+          {
+          user ? <>
+          <p>{user.email}</p>
+          <a  onClick={hundleSignOut} className="btn btn-secondary" >Logout</a>
+          </>: <Link to='/login'>Login</Link>
+          }
+          </a>
       </div>
     </div>
   );
