@@ -3,23 +3,31 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 function Navber() {
-    const link = <>
-    <li><NavLink to='/'>Home</NavLink></li>
-    <li><NavLink to='/login'>Login</NavLink></li>
-    <li><NavLink to='/register'>Register</NavLink></li>
+  const link = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/login">Login</NavLink>
+      </li>
+      <li>
+        <NavLink to="/register">Register</NavLink>
+      </li>
     </>
+  );
 
-    const {user, signOutUser} = useContext(AuthContext)
-    console.log(name);
-    const hundleSignOut = () => {
-      signOutUser()
-      .then(()=>{
+  const { user, signOutUser } = useContext(AuthContext);
+  console.log(name);
+  const hundleSignOut = () => {
+    signOutUser()
+      .then(() => {
         console.log("User logOutsuccessfully done");
       })
-      .catch((error)=>{
-        console.log('ERROR', error.message);
-      })
-    }
+      .catch((error) => {
+        console.log("ERROR", error.message);
+      });
+  };
   return (
     <div className="navbar bg-base-100 shadow-xl py-6">
       <div className="navbar-start">
@@ -44,25 +52,29 @@ function Navber() {
             tabIndex={0}
             className="text-2xl font-semibold menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-           {link}
+            {link}
           </ul>
         </div>
         <a className="btn btn-ghost text-2xl font-bold capitalize">w.w.w</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-2xl font-semibold">
-         {link}
+          {link}
         </ul>
       </div>
       <div className="navbar-end">
         <a className="btn text-xl">
-          {
-          user ? <>
-          <p>{user.email}</p>
-          <a  onClick={hundleSignOut} className="btn btn-secondary" >Logout</a>
-          </>: <Link to='/login'>Login</Link>
-          }
-          </a>
+          {user ? (
+            <>
+              <p>{user.email}</p>
+              <a onClick={hundleSignOut} className="btn btn-secondary">
+                Logout
+              </a>
+            </>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+        </a>
       </div>
     </div>
   );

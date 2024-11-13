@@ -12,6 +12,7 @@ function AuthProvider({ children }) {
     const createUser = (email, password)=>{
         return createUserWithEmailAndPassword(auth, email, password) 
     }
+    // make a login user function
     const loginUser = (email, password)=>{
         return signInWithEmailAndPassword(auth, email,password)
     }
@@ -26,7 +27,6 @@ function AuthProvider({ children }) {
             else{
                 console.log('not found current user..');
                 setUser(null)
-
             }
         })
     },[])
